@@ -136,16 +136,12 @@ require('lazy').setup({
 
   -- File tree
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    version = "*",
+    "nvim-telescope/telescope-file-browser.nvim",
     dependencies = {
+      "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require('neo-tree').setup {}
-    end,
+      "nvim-tree/nvim-web-devicons",
+    }
   }
 }, {})
 
@@ -237,8 +233,14 @@ require('telescope').setup {
       },
     },
   },
+  extensions = {
+    file_browser = {
+      hijack_netrw = true, -- Use instead of NetRW
+    }
+  }
 }
 
+require("telescope").load_extension "file_browser"
 pcall(require('telescope').load_extension, 'fzf') -- Enable telescope fzf native, if installed
 
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').oldfiles, {
@@ -357,12 +359,16 @@ vim.defer_fn(function()
   }
 end, 0)
 
--- ///////
--- NEOTREE
--- ///////
+-- //// ////
+-- FILE TREE
+-- //// ////
 
-vim.keymap.set('n', '<leader>no', ':Neotree<CR>', { desc = '[N]eotree [o]pen' })
-vim.keymap.set('n', '<leader>nc', ':Neotree close<CR>', { desc = '[N]eotree [c]lose' })
+vim.keymap.set(
+  "n",
+  "<leader>f",
+  require "telescope".extensions.file_browser.file_browser,
+  { desc = "[F]ile browser" }
+)
 
 -- ///
 -- LSP
@@ -416,7 +422,6 @@ require('which-key').register {
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['<leader>n'] = { name = '[N]eotree', _ = 'which_key_ignore' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order before setting up
