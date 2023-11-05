@@ -1,7 +1,7 @@
 require('lazy').setup({
 	'tpope/vim-fugitive', -- Git
 	'tpope/vim-rhubarb', -- Fugitive for GitHub
-	'tpope/vim-sleuth', -- Automatically sets whitespace options per file
+	-- 'tpope/vim-sleuth', -- Automatically sets whitespace options per file
 	'tpope/vim-surround', -- Treat enclosing characters ([, {, ',) as text objects
 	'michaeljsmith/vim-indent-object', -- Treat indented sections as text objects
 	{
