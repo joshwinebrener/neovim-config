@@ -233,9 +233,15 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    find_files = {
+      hidden = true
+    },
+  },
   extensions = {
     file_browser = {
       hijack_netrw = true, -- Use instead of NetRW
+      hidden = { file_browser = true, folder_browser = true }
     }
   }
 }
