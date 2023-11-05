@@ -224,6 +224,7 @@ require('lualine').setup { options = { theme = custom_lualine_theme } }
 -- /////////
 
 -- Initialize telescope
+local fb_actions = require "telescope._extensions.file_browser.actions"
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -241,7 +242,22 @@ require('telescope').setup {
   extensions = {
     file_browser = {
       hijack_netrw = true, -- Use instead of NetRW
-      hidden = { file_browser = true, folder_browser = true }
+      hidden = { file_browser = true, folder_browser = true },
+      mappings = {
+        ["i"] = {
+          ["<C-n>"] = fb_actions.create,
+          ["<F2>"] = fb_actions.rename,
+          ["<C-x>"] = fb_actions.move,
+          ["<C-y>"] = fb_actions.copy,
+          ["<C-d>"] = fb_actions.remove,
+          ["<C-o>"] = fb_actions.open,
+        },
+        ["n"] = {
+          ["n"] = fb_actions.create,
+          ["<F2>"] = fb_actions.rename,
+          ["x"] = fb_actions.move,
+        },
+      }
     }
   }
 }
