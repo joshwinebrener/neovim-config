@@ -7,6 +7,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     'nvim-lualine/lualine.nvim', -- Status line
     'numToStr/Comment.nvim',
+    'mbbill/undotree', -- Super snazzy undo history
     {
         -- LSP, duh
         'neovim/nvim-lspconfig',
