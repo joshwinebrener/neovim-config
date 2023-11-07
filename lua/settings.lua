@@ -1,8 +1,4 @@
 -- The whitespace settings everyone always changes
-vim.o.autoindent = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
 
 vim.o.hlsearch = true -- Highlight all search matches
 vim.wo.number = true -- It's honestly kinda stupid that vim doesn't enable line numbering default
@@ -24,9 +20,9 @@ vim.o.scrolloff = 15 -- Keep enough lines above and below the cursor at all time
 -- Momentarily highlight yanked content
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
 })
