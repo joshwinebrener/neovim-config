@@ -4,7 +4,10 @@ require('lazy').setup({
 	-- 'tpope/vim-sleuth', -- Automatically sets whitespace options per file
 	'tpope/vim-surround', -- Treat enclosing characters ([, {, ',) as text objects
 	'michaeljsmith/vim-indent-object', -- Treat indented sections as text objects
-	{
+    'nvim-treesitter/nvim-treesitter-context', -- Keep parent line visible
+    -- https://github.com/psf/black/issues/1149#issuecomment-561099427
+    'psf/black', -- For the delicious Python formatting
+    {
 		'neovim/nvim-lspconfig', -- LSP, duh
 		dependencies = {
 			'williamboman/mason.nvim',
@@ -23,12 +26,13 @@ require('lazy').setup({
 			'rafamadriz/friendly-snippets',
 		},
 	},
-	{ 'folke/which-key.nvim',      opts = {} }, -- Shows available bindings from previous keypress
+	'folke/which-key.nvim',
+    'simrat39/symbols-outline.nvim',
 	{
 		-- In-editor git hunk support
 		'lewis6991/gitsigns.nvim',
 		opts = {
-			-- See `:help gitsigns.txt`
+	-- 		-- See `:help gitsigns.txt`
 			signs = {
 				add = { text = '+' },
 				change = { text = '~' },

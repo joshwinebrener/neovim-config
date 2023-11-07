@@ -16,11 +16,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('plugins')
+require('lualine').setup()
 require('settings')
 require('theme')
 require('_telescope')
 require('treesitter')
 require('keymaps')
+require('outline')
 require('mason').setup()
 require('mason-lspconfig').setup()
 require('lsp') -- NOTE: call this *after* mason setup
