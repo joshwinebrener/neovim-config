@@ -16,6 +16,7 @@ vim.o.termguicolors = true -- Show da fancy colors
 vim.o.textwidth = 100 -- Wrap lines after 100 characters
 vim.o.colorcolumn = '-1' -- Line length indicator just before line will be split
 vim.o.scrolloff = 15 -- Keep enough lines above and below the cursor at all times
+vim.o.exrc = true -- Use additional configuration from `.nvim.lua` in pwd
 
 -- Momentarily highlight yanked content
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

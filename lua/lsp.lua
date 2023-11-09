@@ -57,18 +57,20 @@ local servers = {
     },
   },
 }
-local formatters = {
-  -- NOTE: these will have to be installed manually.  Sorry.
-  lua = { 'stylua' },
-  python = { 'isort', 'black' },
-  javascript = { 'prettier' },
-}
 
 -- Setup neovim lua configuration
 require('neodev').setup()
 
-require('conform').setup { formatters_by_ft = formatters }
-require('conform').setup { format_on_save = { timeout_ms = 500, lsp_fallback = true } }
+require('conform').setup {
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    python = { --[[ 'isort', ]]
+      'black',
+    },
+    javascript = { 'prettier' },
+  },
+  format_on_save = { timeout_ms = 5000, async = true, lsp_fallback = true },
+}
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
   callback = function(args)
