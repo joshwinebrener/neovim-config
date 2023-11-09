@@ -3,8 +3,7 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<C-t>'] = require('telescope.actions').select_tab,
       },
     },
   },
@@ -19,7 +18,6 @@ require('telescope').setup {
       hidden = { file_browser = true, folder_browser = true },
       mappings = {
         ['i'] = {
-          ['<C-n>'] = fb_actions.create,
           ['<F2>'] = fb_actions.rename,
           ['<C-x>'] = fb_actions.move,
           ['<C-y>'] = fb_actions.copy,
