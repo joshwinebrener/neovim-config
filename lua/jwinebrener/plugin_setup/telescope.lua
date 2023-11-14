@@ -1,42 +1,3 @@
-local fb_actions = require 'telescope._extensions.file_browser.actions'
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-t>'] = require('telescope.actions').select_tab,
-      },
-    },
-  },
-  pickers = {
-    find_files = {
-      hidden = true,
-    },
-  },
-  extensions = {
-    file_browser = {
-      hijack_netrw = true, -- Use instead of NetRW
-      hidden = { file_browser = true, folder_browser = true },
-      mappings = {
-        ['i'] = {
-          ['<F2>'] = fb_actions.rename,
-          ['<C-x>'] = fb_actions.move,
-          ['<C-y>'] = fb_actions.copy,
-          ['<C-d>'] = fb_actions.remove,
-          ['<C-o>'] = fb_actions.open,
-        },
-        ['n'] = {
-          ['n'] = fb_actions.create,
-          ['<F2>'] = fb_actions.rename,
-          ['x'] = fb_actions.move,
-        },
-      },
-    },
-  },
-}
-
-require('telescope').load_extension 'file_browser'
-pcall(require('telescope').load_extension, 'fzf') -- Enable telescope fzf native, if installed
-
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').oldfiles, {
   desc = '[S]earch [R]ecently opened',
 })
@@ -77,3 +38,38 @@ vim.keymap.set(
   require('telescope').extensions.file_browser.file_browser,
   { desc = '[F]ile browser' }
 )
+
+return {
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-t>'] = require('telescope.actions').select_tab,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+  },
+  extensions = {
+    file_browser = {
+      hijack_netrw = true, -- Use instead of NetRW
+      hidden = { file_browser = true, folder_browser = true },
+      mappings = {
+        ['i'] = {
+          ['<F2>'] = require('telescope._extensions.file_browser.actions').rename,
+          ['<C-x>'] = require('telescope._extensions.file_browser.actions').move,
+          ['<C-y>'] = require('telescope._extensions.file_browser.actions').copy,
+          ['<C-d>'] = require('telescope._extensions.file_browser.actions').remove,
+          ['<C-o>'] = require('telescope._extensions.file_browser.actions').open,
+        },
+        ['n'] = {
+          ['n'] = require('telescope._extensions.file_browser.actions').create,
+          ['<F2>'] = require('telescope._extensions.file_browser.actions').rename,
+          ['x'] = require('telescope._extensions.file_browser.actions').move,
+        },
+      },
+    },
+  },
+}
