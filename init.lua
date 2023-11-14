@@ -1,3 +1,18 @@
+vim.g.mapleader = ' ' -- Space is the best leader key
+vim.g.maplocalleader = ' ' -- Space is the best leader key
+vim.keymap.set(
+  'n',
+  '<leader>i',
+  "<cmd>exe 'edit '.stdpath('config').'/init.lua'<CR>",
+  { desc = 'Edit [I]nit.lua' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>I',
+  "<cmd>exe 'Ex '.stdpath('config')<CR>",
+  { desc = 'Explore [I]nit directory' }
+)
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
