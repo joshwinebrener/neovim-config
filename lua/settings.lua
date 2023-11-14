@@ -1,5 +1,3 @@
-vim.g.mapleader = ' ' -- Space is the best leader key
-vim.g.maplocalleader = ' ' -- Space is the best leader key
 vim.o.hlsearch = true -- Highlight all search matches
 vim.wo.number = true -- It's honestly kinda stupid that vim doesn't enable line numbering default
 vim.wo.relativenumber = true -- Relative numbering for speedyboi jumping
