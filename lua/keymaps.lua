@@ -5,8 +5,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Reset normal mode with Esc
-vim.keymap.set('n', '<Esc>', ':noh<CR>zz')
+-- Escape stuff
+vim.keymap.set('n', '<Esc>', '<Cmd>noh<CR>zz')
+vim.keymap.set('v', '<C-c>', '<Esc>')
 
 -- Ctrl-d and Ctrl-u automaticaly re-center
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
