@@ -10,6 +10,7 @@ return {
     name = "catppuccin",
     opts = {
       transparent_background = true,
+      term_colors = true,
       color_overrides = {
         mocha = {
           base = "#000000",
