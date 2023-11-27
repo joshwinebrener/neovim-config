@@ -43,10 +43,10 @@ end
 -- Enable the following language servers
 --   NOTE: this must be performed *after* mason setup
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  pyright = {}, -- PYTHON, BABY!!!
-  -- rust_analyzer = {},
+  clangd = {},
+  gopls = {},
+  ruff = {}, -- PYTHON, BABY!!!
+  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -60,21 +60,6 @@ local servers = {
 
 -- Setup neovim lua configuration
 require('neodev').setup()
-
-require('conform').setup {
-  formatters_by_ft = {
-    lua = { 'stylua' },
-    python = { 'black' },
-    javascript = { 'prettier' },
-  },
-  format_on_save = { timeout_ms = 5000, async = true, lsp_fallback = true },
-}
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*',
-  callback = function(args)
-    require('conform').format { bufnr = args.buf }
-  end,
-})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
