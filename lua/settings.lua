@@ -1,5 +1,5 @@
-vim.o.hlsearch = true -- Highlight all search matches
-vim.wo.number = true -- It's honestly kinda stupid that vim doesn't enable line numbering default
+vim.o.hlsearch = false -- Highlighting all searches is not the move
+vim.wo.number = true -- Highlighting the next match while typing *is* the move
 vim.wo.relativenumber = true -- Relative numbering for speedyboi jumping
 vim.o.mouse = 'a' -- Allow mouse usage in all modes
 vim.o.breakindent = true -- Indent wrapped lines

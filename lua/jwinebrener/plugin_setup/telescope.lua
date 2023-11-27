@@ -32,6 +32,9 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, {
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, {
   desc = '[S]earch [R]esume',
 })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, {
+  desc = '[S]earch [K]eymaps'
+})
 vim.keymap.set(
   'n',
   '<leader>f',
