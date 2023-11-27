@@ -42,7 +42,7 @@ vim.keymap.set(
   { desc = '[F]ile browser' }
 )
 
-require('telescope').setup {
+return {
   defaults = {
     mappings = {
       i = {
@@ -76,5 +76,3 @@ require('telescope').setup {
     },
   },
 }
-require('telescope').load_extension 'file_browser'
-pcall(require('telescope').load_extension, 'fzf') -- Enable telescope fzf native, if installed

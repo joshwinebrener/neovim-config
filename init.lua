@@ -1,4 +1,4 @@
-vim.g.mapleader = ' ' -- Space is the best leader key
+vim.g.mapleader = ' '      -- Space is the best leader key
 vim.g.maplocalleader = ' ' -- Space is the best leader key
 
 -- Put the shortcuts back to the config at the top in case it breaks further down
@@ -31,7 +31,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require 'settings'
 require('lazy').setup {
-  'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines
+  'numToStr/Comment.nvim',   -- "gc" to comment visual regions/lines
   'f-person/git-blame.nvim', -- Git blame
   require 'jwinebrener.lazy.gitsigns',
   require 'jwinebrener.lazy.lazygit',
@@ -45,8 +45,9 @@ require('lazy').setup {
   require 'jwinebrener.lazy.treesitter',
   'mbbill/undotree',
   'michaeljsmith/vim-indent-object', -- Treat indented sections as text objects
-  'tpope/vim-sleuth', -- Infer whitespace settings
-  'tpope/vim-surround', -- Treat enclosing characters ([, {, ',) as text objects
+  'tpope/vim-sleuth',                -- Infer whitespace settings
+  'tpope/vim-fugitive',              -- Infer whitespace settings
+  'tpope/vim-surround',              -- Treat enclosing characters ([, {, ',) as text objects
   require 'jwinebrener.lazy.lsp_zero',
 }
 require('telescope').setup(require 'jwinebrener.plugin_setup.telescope')
