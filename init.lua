@@ -41,9 +41,9 @@ require('lazy').setup {
   'nvim-treesitter/nvim-treesitter-context', -- Keep parent line visible
   require 'jwinebrener.lazy.onedark',
   require 'jwinebrener.lazy.telescope',
-  require 'jwinebrener.lazy.telescope-file-browser',
+  require 'jwinebrener.lazy.toggleterm',
   require 'jwinebrener.lazy.treesitter',
-  'mbbill/undotree',
+  require 'jwinebrener.lazy.undotree',
   'michaeljsmith/vim-indent-object', -- Treat indented sections as text objects
   'tpope/vim-sleuth',                -- Infer whitespace settings
   'tpope/vim-fugitive',              -- Infer whitespace settings
@@ -51,7 +51,7 @@ require('lazy').setup {
   require 'jwinebrener.lazy.lsp_zero',
 }
 require('telescope').setup(require 'jwinebrener.plugin_setup.telescope')
-require('telescope').load_extension 'file_browser'
+require('Comment').setup()
 pcall(require('telescope').load_extension, 'fzf') -- Enable telescope fzf native, if installed
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup(require 'jwinebrener.plugin_setup.treesitter')

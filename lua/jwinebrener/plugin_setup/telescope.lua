@@ -35,12 +35,6 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, {
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, {
   desc = '[S]earch [K]eymaps'
 })
-vim.keymap.set(
-  'n',
-  '<leader>f',
-  require('telescope').extensions.file_browser.file_browser,
-  { desc = '[F]ile browser' }
-)
 
 return {
   defaults = {
@@ -53,26 +47,6 @@ return {
   pickers = {
     find_files = {
       hidden = true,
-    },
-  },
-  extensions = {
-    file_browser = {
-      hijack_netrw = true, -- Use instead of NetRW
-      hidden = { file_browser = true, folder_browser = true },
-      mappings = {
-        ['i'] = {
-          ['<F2>'] = require('telescope._extensions.file_browser.actions').rename,
-          ['<C-x>'] = require('telescope._extensions.file_browser.actions').move,
-          ['<C-y>'] = require('telescope._extensions.file_browser.actions').copy,
-          ['<C-d>'] = require('telescope._extensions.file_browser.actions').remove,
-          ['<C-o>'] = require('telescope._extensions.file_browser.actions').open,
-        },
-        ['n'] = {
-          ['n'] = require('telescope._extensions.file_browser.actions').create,
-          ['<F2>'] = require('telescope._extensions.file_browser.actions').rename,
-          ['x'] = require('telescope._extensions.file_browser.actions').move,
-        },
-      },
     },
   },
 }
