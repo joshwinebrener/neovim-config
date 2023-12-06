@@ -16,10 +16,11 @@ end
 
 vim.keymap.set(
   'n',
-  '<leader>tp',
-  '<cmd>TermExec cmd="powershell.exe" name=Powershell<cr>',
-  { desc = '[T]erminal [P]owershell' }
+  '<leader>t',
+  '<cmd>ToggleTerm<cr>',
+  { desc = '[T]erminal' }
 )
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
 
 return {
   'akinsho/toggleterm.nvim',
