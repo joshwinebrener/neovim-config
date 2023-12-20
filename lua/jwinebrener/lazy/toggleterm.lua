@@ -26,9 +26,9 @@ return {
   'akinsho/toggleterm.nvim',
   version = "*",
   opts = {
-    direction = 'float',
-    float_opts = {
-      border = 'curved'
-    }
+    -- direction = 'float',
+    -- float_opts = {
+    --   border = 'curved'
+    -- }
   }
 }
