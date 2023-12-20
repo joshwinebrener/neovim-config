@@ -4,7 +4,6 @@ return {
     'rcarriga/nvim-dap-ui',
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-    -- Add your own debuggers here
     'mfussenegger/nvim-dap-python',
   },
   config = function()
@@ -12,7 +11,7 @@ return {
     local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
-      automatic_setup = true, -- Allow vim best effort first
+      automatic_setup = true,
     }
 
     vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
@@ -29,7 +28,6 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
     }
     vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = 'Debug: Toggle UI' })
-    require("dap").set_exception_breakpoints({ "Warning", "Error", "Exception" })
 
     local dap_py = require 'dap-python'
     local path = vim.loop.cwd() .. '/.venv/Scripts/python.exe'

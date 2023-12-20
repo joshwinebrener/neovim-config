@@ -11,9 +11,6 @@ vim.keymap.set('n', '<leader>sc', function()
     previewer = false,
   })
 end, { desc = '[S]earch [C]urrently open buffer' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, {
-  desc = 'Search [G]it [F]iles',
-})
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, {
   desc = '[S]earch [F]iles',
 })
