@@ -70,8 +70,5 @@ return {
         },
       },
     }
-    -- vim.defer_fn(function()
-    --   require('nvim-treesitter.configs').setup({})
-    -- end, 0)
   end
 }

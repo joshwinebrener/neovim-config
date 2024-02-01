@@ -28,6 +28,7 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
     }
     vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = 'Debug: Toggle UI' })
+    require("dap").set_exception_breakpoints({ "Warning", "Error", "Exception" })
 
     local dap_py = require 'dap-python'
     local path = vim.loop.cwd() .. '/.venv/Scripts/python.exe'
