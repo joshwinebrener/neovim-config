@@ -5,7 +5,8 @@ return {
   },
   build = ':TSUpdate',
   config = function()
-    require 'nvim-treesitter'.setup {
+    require 'nvim-treesitter'.setup()
+    require 'nvim-treesitter.configs'.setup {
       ensure_installed = {
         'bash',
         'c',
@@ -67,19 +68,10 @@ return {
             ['[]'] = '@class.outer',
           },
         },
-        swap = {
-          enable = true,
-          swap_next = {
-            ['<leader>a'] = '@parameter.inner',
-          },
-          swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
-          },
-        },
       },
     }
-    vim.defer_fn(function()
-      require('nvim-treesitter.configs').setup(require 'jwinebrener.plugin_setup.treesitter')
-    end, 0)
+    -- vim.defer_fn(function()
+    --   require('nvim-treesitter.configs').setup({})
+    -- end, 0)
   end
 }
