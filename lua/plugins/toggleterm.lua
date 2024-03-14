@@ -27,6 +27,11 @@ return {
     )
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
 
-    require 'toggleterm'.setup()
+    require 'toggleterm'.setup {
+      direction = 'float',
+      float_opts = {
+        border = 'curved'
+      }
+    }
   end
 }
