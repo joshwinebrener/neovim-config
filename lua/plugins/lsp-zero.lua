@@ -10,7 +10,7 @@ return {
     'williamboman/mason-lspconfig.nvim',
   },
   config = function()
-    local servers = { 'lua_ls', 'rust_analyzer', 'ruff_lsp', 'gopls', 'pyright' }
+    local servers = { 'lua_ls', 'rust_analyzer', 'ruff_lsp', 'gopls', 'html', 'tsserver' }
     local lsp_zero = require('lsp-zero')
     lsp_zero.on_attach(function(client, bufnr)
       lsp_zero.default_keymaps({ buffer = bufnr })

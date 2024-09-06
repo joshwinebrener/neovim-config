@@ -1,3 +1,23 @@
+-- Leader-d to diff visual selection to clipboard
+local function compare_to_clipboard()
+  local ftype = vim.api.nvim_eval("&filetype")
+  vim.cmd(string.format([[
+    execute "normal! \"xy"
+    vsplit
+    enew
+    normal! P
+    setlocal buftype=nowrite
+    set filetype=%s
+    diffthis
+    execute "normal! \<C-w>\<C-w>"
+    enew
+    set filetype=%s
+    normal! "xP
+    diffthis
+  ]], ftype, ftype))
+end
+vim.keymap.set('x', '<Space>d', compare_to_clipboard)
+
 -- Don't do anything else with the leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -24,4 +44,10 @@ vim.keymap.set('n', '<leader>D', vim.diagnostic.open_float, {
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Explorer at cwd
-vim.keymap.set('n', '<leader>e', '<cmd>Ex %/..<cr>', { desc = 'Open explorer at cwd' })
+vim.keymap.set('n', '<leader>e', "<cmd>execute 'e %/..'<cr>", { desc = 'Open explorer at cwd' })
+
+vim.keymap.set('n', '<leader>1', '1gt')
+vim.keymap.set('n', '<leader>2', '2gt')
+vim.keymap.set('n', '<leader>3', '3gt')
+vim.keymap.set('n', '<leader>4', '4gt')
+vim.keymap.set('n', '<leader>5', '5gt')
