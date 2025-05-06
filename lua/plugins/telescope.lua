@@ -24,7 +24,7 @@ return {
         previewer = false,
       })
     end, { desc = '[S]earch [C]urrently open buffer' })
-    vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, {
+    vim.keymap.set('n', '<c-p>', require('telescope.builtin').find_files, {
       desc = '[S]earch [F]iles',
     })
     vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {
