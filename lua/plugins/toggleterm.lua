@@ -25,7 +25,7 @@ return {
       '<cmd>ToggleTerm<cr>',
       { desc = '[T]erminal' }
     )
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<esc>', '<esc><cmd>ToggleTerm<cr>', opts)
 
     require 'toggleterm'.setup {
       direction = 'float',
