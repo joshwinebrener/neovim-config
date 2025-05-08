@@ -189,6 +189,9 @@ local language_servers = {
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
+          diagnosticSeverityOverrides = {
+            reportExplicitAny = 'none',
+          }
         },
       },
     },
