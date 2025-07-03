@@ -149,13 +149,11 @@ local python_project_root = {
   '.git',
 }
 local language_servers = {
-
   luals = {
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },
     root_markers = { '.luarc.json', '.luarc.jsonc' },
   },
-
   ruff = {
     cmd = { 'ruff', 'server' },
     filetypes = { 'python' },
@@ -167,18 +165,23 @@ local language_servers = {
         configuration = {
           lint = {
             select = {
-              "E4",
-              "E7",
-              "E9",
-              "F",
-              "I",
+              "ALL"
+              -- "E4",
+              -- "E7",
+              -- "E9",
+              -- "F",
+              -- "I",
             },
+            ["extend-ignore"] = {
+              "D4",
+              "COM",
+              "FBT",
+            }
           },
         }
       }
     }
   },
-
   basedpyright = {
     cmd = { 'basedpyright-langserver', '--stdio' },
     filetypes = { 'python' },
@@ -189,14 +192,49 @@ local language_servers = {
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
-          diagnosticSeverityOverrides = {
-            reportExplicitAny = 'none',
-          }
+          typeCheckingMode = 'basic',
+          -- diagnosticSeverityOverrides = {
+          --   reportExplicitAny = 'none',
+          --   reportUntypedBaseClass = 'none',
+          --   reportUnknownVariableType = 'none',
+          -- }
         },
       },
     },
+  },
+  jsonls = {
+    cmd = { "vscode-json-language-server", "--stdio" },
+    filetypes = { "json", "jsonc" },
+    init_options = {
+      provideFormatter = true,
+    }
+  },
+  biome = {
+    cmd = { 'biome', 'lsp-proxy' },
+    filetypes = {
+      'astro',
+      'css',
+      'graphql',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'jsonc',
+      'svelte',
+      'typescript',
+      'typescript.tsx',
+      'typescriptreact',
+      'vue',
+    },
+    -- workspace_required = true,
+    -- root_dir = function(bufnr, on_dir)
+    --   local fname = vim.api.nvim_buf_get_name(bufnr)
+    --   local root_files = { 'biome.json', 'biome.jsonc' }
+    --   root_files = require 'lspconfig.util'.insert_package_json(root_files, 'biome', fname)
+    --   local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+    --   on_dir(root_dir)
+    -- end,
   }
-
 }
 
 for server, config in pairs(language_servers) do
