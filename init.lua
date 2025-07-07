@@ -90,6 +90,10 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Put the shortcuts back to the config at the top in case it breaks further down
+vim.keymap.set('n', '<leader>i', "<cmd>exe 'tabe '.stdpath('config').'/init.lua'<CR>", { desc = 'Edit [I]nit.lua' })
+vim.keymap.set('n', '<leader>I', "<cmd>exe 'tabe '.stdpath('config')<CR>", { desc = 'Explore [I]nit directory' })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -199,6 +203,13 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Quick tab navigation
+vim.keymap.set('n', '<leader>1', '1gt')
+vim.keymap.set('n', '<leader>2', '2gt')
+vim.keymap.set('n', '<leader>3', '3gt')
+vim.keymap.set('n', '<leader>4', '4gt')
+vim.keymap.set('n', '<leader>5', '5gt')
+
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
@@ -256,6 +267,53 @@ require('lazy').setup({
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
 
+  {
+    'tpope/vim-fugitive',
+    config = function()
+      vim.keymap.set('n', 'ul', '<cmd>diffget \\2<cr>', { desc = '[U]se [L]eft' })
+      vim.keymap.set('n', 'ur', '<cmd>diffget \\3<cr>', { desc = '[U]se [R]eft' })
+    end,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      -- Configure some esoteric PowerShell options, if running on Windows
+      if vim.fn.has 'win32' then
+        local powershell_options = {
+          shell = vim.fn.executable 'pwsh' == 1 and 'pwsh' or 'powershell',
+          shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+          shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
+          shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode',
+          shellquote = '',
+          shellxquote = '',
+        }
+        for option, value in pairs(powershell_options) do
+          vim.opt[option] = value
+        end
+      end
+
+      require('toggleterm').setup {
+        direction = 'float',
+        open_mapping = '<c-t>',
+        float_opts = {
+          border = 'curved',
+        },
+      }
+    end,
+  },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+      require('onedark').setup {
+        style = 'darker',
+        transparent = true,
+      }
+      require('onedark').load()
+    end,
+  },
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -698,6 +756,21 @@ require('lazy').setup({
             },
           },
         },
+        ruff = {
+          settings = { foo = false },
+          single_file_support = true,
+          init_options = {
+            settings = {
+              lineLength = 100,
+              configuration = {
+                lint = {
+                  select = { 'ALL' },
+                  ['extend-ignore'] = { 'D4', 'COM', 'FBT' },
+                },
+              },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -733,6 +806,9 @@ require('lazy').setup({
           end,
         },
       }
+      for server_name, config in pairs(servers) do
+        vim.lsp.config(server_name, config)
+      end
     end,
   },
 
@@ -876,28 +952,6 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -918,6 +972,17 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
+      -- Convenient file support
+      require('mini.files').setup {
+        mappings = {
+          go_in = '',
+          go_in_plus = 'l',
+          go_out = '',
+          go_out_plus = 'H',
+        },
+      }
+      vim.keymap.set('n', '<leader>e', require('mini.files').open, { desc = 'Open [E]xplorer at cwd' })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
