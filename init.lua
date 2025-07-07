@@ -979,7 +979,7 @@ require('lazy').setup({
           go_in = '',
           go_in_plus = 'l',
           go_out = '',
-          go_out_plus = 'H',
+          go_out_plus = 'h',
         },
       }
       vim.keymap.set('n', '<leader>e', require('mini.files').open, { desc = 'Open [E]xplorer at cwd' })
